@@ -1,0 +1,40 @@
+<div class="ui inverted dimmer" [class.active]=loading>
+  <div class="ui text loader">
+    Loading
+  </div>
+</div>
+<div class="panel panel-primary pt-5">
+  <div class="panel-body pt-4">
+    <h2 style="text-align: center;">Districts list&nbsp;&nbsp;&nbsp;
+      <button class="btn btn-primary" routerLink="/admin/add">Add</button></h2>
+    <div class="row">
+      <div class="col">
+        <div class="tableWrap" style="margin-top: 50px;">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th class="bg-primary" style="text-align: center;">District</th>
+                <th class="bg-primary" style="text-align: center;">Confirmed</th>
+                <th class="bg-primary" style="text-align: center;">Recovered</th>
+                <th class="bg-primary" style="text-align: center;">Deaths</th>
+                <th class="bg-primary" style="text-align: center;">Active</th>
+                <th class="bg-primary" style="text-align: center;">Actions</th>
+              </tr>
+            </thead>
+            <tbody style="background-color: lightblue;text-align: center;">
+              <tr *ngFor="let district of Districts | async">
+                <td>{{district.district}}</td>
+                <td>{{district.confirmed}}</td>
+                <td>{{district.recovered}}</td>
+                <td>{{district.death}}</td>
+                <td>{{district.active}}</td>
+                <td><button (click)="update(district.id)" class="btn btn-primary">Update</button>
+                  <button (click)="deleteDistrict(district.id)" class="btn btn-danger" style="margin-left: 20px;">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+</div>

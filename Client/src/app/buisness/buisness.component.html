@@ -1,0 +1,83 @@
+<div class="ui inverted dimmer" [class.active]=loading>
+  <div class="ui text loader">
+    Loading
+  </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" routerLink="/buisness">Covid19 Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <a class="nav-link" routerLink="/buisness/home" routerLinkActive="active">Home</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          More
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/buisness/india" routerLinkActive="active">Covid-19 across India</a>
+          <a class="dropdown-item" routerLink="/buisness/tamilnadu" routerLinkActive="active">Covid-19 across Tamilnadu</a>
+        </div>
+      </li>
+      <a class="nav-link" routerLink="/buisness/epass" routerLinkActive="active">Epass</a>
+    </ul>
+    <ul class="navbar-nav">
+      <a class="nav-link" *ngIf="!_service.loggedIn()" routerLink="/buisness/login" routerLinkActive="active">Login</a>
+      <a class="nav-link" *ngIf="!_service.loggedIn()"  routerLink="/buisness/register" routerLinkActive="active">Register</a>
+      <a class="nav-link" style="cursor:pointer;" *ngIf="_service.loggedIn()" (click)="_service.logoutUser()">Logout</a>
+    </ul>
+  </div>
+</nav>
+<div *ngIf="router.url=='/buisness'">
+  <div class="jumbotron bg-light text-center">
+    <h1 class="display-4">Covid-19</h1>
+    <hr>
+    <app-dashboard-card [totalConfirmed]='totalConfirmed'
+      [totalActive]='totalActive' [totalRecovered]='totalRecovered' [totalDeaths]='totalDeaths'>
+    </app-dashboard-card>
+  <hr>
+  <div class="fluid-container">
+    <div class="ui form">
+      <div class="inline fields">
+        <label for="fruit">Select Case Type:</label>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input id="c" type="radio" value="c" name="caseType" #c checked="" tabindex="0" class="hidden" (click)="updateChart(c)">
+            <label for="c">Confirmed</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input id="d" type="radio" value="d" #d name="caseType" tabindex="0" class="hidden" (click)="updateChart(d)">
+            <label for="d">Deaths</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input id="r" type="radio" value="r" #r name="caseType" tabindex="0" class="hidden" (click)="updateChart(r)">
+            <label for="r">Recovered</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input id="a" type="radio" value="a" #a name="caseType" tabindex="0" class="hidden" (click)="updateChart(a)">
+            <label for="a">Active</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <google-chart [type]="chart.PieChart" [height]="chart.height" [options]="chart.options" [data]="datatable" style="width: 100%;"></google-chart>
+      </div>
+      <div class="col">
+        <google-chart [type]="chart.ColumnChart" [height]="chart.height" [options]="chart.options" [data]="datatable" style="width: 100%;"></google-chart>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

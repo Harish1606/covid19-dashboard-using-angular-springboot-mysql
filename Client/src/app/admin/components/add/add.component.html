@@ -1,0 +1,39 @@
+<div class="ui inverted dimmer" [class.active]=loading>
+  <div class="ui text loader">
+    Loading
+  </div>
+</div>
+<div class="row pt-5">
+  <div class="col-md-5 mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header bg-primary">
+          <h3 class="mb-0">Add district</h3>
+      </div>
+      <div class="card-body">
+        <form class="form" #addForm="ngForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="district">District</label>
+            <input type="text" class="form-control rounded-0" name="district" [(ngModel)]="districtname.district" #district="ngModel" placeholder="Enter district"required>
+          </div>
+          <div class="form-group">
+            <label for="confirmed">Confirmed</label>
+            <input type="number" class="form-control rounded-0" name="confirmed" [(ngModel)]="districtname.confirmed" #confirmed="ngModel" placeholder="Enter confirmed count" required>
+          </div>
+          <div class="form-group">
+            <label for="recovered">Recovered</label>
+            <input type="number" class="form-control rounded-0" name="recovered" [(ngModel)]="districtname.recovered" #recovered="ngModel" placeholder="Enter recovered count" required>
+          </div>
+          <div class="form-group">
+            <label for="death">Deaths</label>
+            <input type="number" class="form-control rounded-0" name="death" [(ngModel)]="districtname.death" #death="ngModel" placeholder="Enter death count" required>
+          </div>
+          <div class="form-group">
+            <label for="confirmed">Active</label>
+            <input type="number" class="form-control rounded-0" name="active" [(ngModel)]="districtname.active" #active="ngModel" placeholder="Enter active count" required>
+          </div>
+          <button [disabled]="addForm.form.invalid" type="submit" class="btn btn-primary float-right">Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

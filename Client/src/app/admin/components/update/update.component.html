@@ -1,0 +1,35 @@
+<div class="ui inverted dimmer" [class.active]=loading>
+  <div class="ui text loader">
+    Loading
+  </div>
+</div>
+<div class="row pt-5">
+  <div class="col-md-5 mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header bg-primary">
+          <h3 class="mb-0">Update {{district.district}}</h3>
+      </div>
+      <div class="card-body">
+        <form class="form" #updateForm="ngForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="confirmed">Confirmed</label>
+            <input type="number" class="form-control rounded-0" name="confirmed" [(ngModel)]="district.confirmed" #confirmed="ngModel" required>
+          </div>
+          <div class="form-group">
+            <label for="recovered">Recovered</label>
+            <input type="number" class="form-control rounded-0" name="recovered" [(ngModel)]="district.recovered" #recovered="ngModel" required>
+          </div>
+          <div class="form-group">
+            <label for="death">Deaths</label>
+            <input type="number" class="form-control rounded-0" name="death" [(ngModel)]="district.death" #death="ngModel" required>
+          </div>
+          <div class="form-group">
+            <label for="confirmed">Active</label>
+            <input type="number" class="form-control rounded-0" name="active" [(ngModel)]="district.active" #active="ngModel" required>
+          </div>
+          <button [disabled]="updateForm.form.invalid" type="submit" class="btn btn-primary float-right">Update</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

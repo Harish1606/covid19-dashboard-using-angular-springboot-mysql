@@ -1,0 +1,61 @@
+<div class="ui inverted dimmer" [class.active]=loading>
+  <div class="ui text loader">
+    Loading
+  </div>
+</div>
+<div class="row pt-5">
+  <div class="col-md-5 mx-auto">
+      <div class="card rounded-0">
+          <div class="card-header bg-primary">
+              <h3 class="mb-0">Epass Form</h3>
+          </div>
+          <div class="card-body">
+              <form #epassForm="ngForm" class="form" (ngSubmit)="EpassForm()">
+                  <div class="form-group">
+                      <label for="email">Email</label>
+                      <input  name="emailId" type="email" class="form-control rounded-0" placeholder="Enter email id" [(ngModel)]="epass.emailId" #emailId="ngModel" required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$">
+                  </div>
+                  <div class="form-group">
+                    <label for="username">Full Name</label>
+                    <input  name="userName" type="text" class="form-control rounded-0" placeholder="Enter full name" [(ngModel)]="epass.userName" #userName="ngModel" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="from">Select From Address</label>
+                    <select name="from" id="from" class="form-control" [(ngModel)]="epass.from" #from="ngModel" required>
+                      <option  *ngFor="let district of Districts | async">{{district.district}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="to">Select To Address</label>
+                    <select name="to" id="to" class="form-control" [(ngModel)]="epass.to" #to="ngModel" required>
+                      <option  *ngFor="let district of Districts | async">{{district.district}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="reason">Reason</label>
+                    <select name="reason" id="reason" class="form-control" [(ngModel)]="epass.reason" #reason="ngModel" required>
+                      <option *ngFor="let r of Reasons" >{{r}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone No</label>
+                    <input type="number" name="phone" class="form-control" placeholder="Enter Phone Number" [(ngModel)]="epass.phone" #phone="ngModel" required>
+                  </div>
+                  <button [disabled]="epassForm.form.invalid" type="submit" class="btn btn-primary float-right"   data-toggle="modal" data-target="#myModal">Submit</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="container">
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>{{message}}</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
